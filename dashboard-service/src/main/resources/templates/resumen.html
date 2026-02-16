@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Resumen Empresa</title>
+</head>
+<body>
+
+<h1>Resumen Empresa</h1>
+
+<!-- Mostrar empresa -->
+<div th:if="${empresa != null}">
+    <h2 th:text="${empresa.nombre}">Nombre de la empresa</h2>
+    <p><strong>RUT:</strong> <span th:text="${empresa.rut}"></span></p>
+    <p><strong>Dirección:</strong> <span th:text="${empresa.direccion}"></span></p>
+    <p><strong>Teléfono:</strong> <span th:text="${empresa.telefono}"></span></p>
+    <p><strong>Correo:</strong> <span th:text="${empresa.correo}"></span></p>
+</div>
+<div th:if="${empresa == null}">
+    <p>Empresa no encontrada</p>
+</div>
+
+<hr/>
+
+<!-- Contactos -->
+<h2>Contactos</h2>
+<ul th:if="${contactos != null and !contactos.isEmpty()}">
+    <li th:each="c : ${contactos}">
+        <span th:text="${c.nombre}"></span> -
+        <span th:text="${c.cargo}"></span> -
+        <span th:text="${c.correo}"></span> -
+        <span th:text="${c.celular}"></span>
+    </li>
+</ul>
+<p th:if="${contactos == null or contactos.isEmpty()}">No hay contactos registrados</p>
+
+<hr/>
+
+<!-- Interacciones -->
+<h2>Interacciones</h2>
+<ul th:if="${interacciones != null and !interacciones.isEmpty()}">
+    <li th:each="i : ${interacciones}">
+        <span th:text="${i.descripcion}"></span> -
+        <span th:text="${i.fecha}"></span> <!-- Ajusta si tu DTO tiene otra propiedad de fecha -->
+    </li>
+</ul>
+<p th:if="${interacciones == null or interacciones.isEmpty()}">No hay interacciones registradas</p>
+
+</body>
+</html>

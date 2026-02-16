@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Interacciones</title></head>
+<body>
+<h1>Interacciones</h1>
+
+<form th:action="@{/contactos/{contactoId}/interacciones(contactoId=${contactoId})}"
+      th:object="${interaccionForm}" method="post">
+    <label>Descripción: <input type="text" th:field="*{descripcion}" /></label><br/>
+    <label>Fecha: <input type="date" th:field="*{fecha}" /></label><br/>
+    <label>Completada: <input type="checkbox" th:field="*{completada}" /></label><br/>
+    <button type="submit">Agregar Interacción</button>
+</form>
+
+<h2>Lista de Interacciones</h2>
+<ul>
+    <li th:each="i : ${interacciones}">
+        <span th:text="${i.descripcion}"></span> -
+        <span th:text="${#dates.format(i.fecha, 'dd/MM/yyyy')}"></span> -
+        <span th:text="${i.completada ? 'Sí' : 'No'}"></span>
+    </li>
+</ul>
+
+<a th:href="@{'/empresas'}">Volver a Empresas</a>
+
+</body>
+</html>
