@@ -3,7 +3,6 @@ package com.darwin.controller;
 import com.darwin.cliente.ContactoClient;
 import com.darwin.cliente.EmpresaClient;
 import com.darwin.cliente.InteraccionClient;
-import com.darwin.dto.ContactoDTO;
 import com.darwin.dto.EmpresaDTO;
 import com.darwin.dto.InteraccionDTO;
 import org.springframework.stereotype.Controller;
@@ -48,7 +47,7 @@ public class DashboardViewController {
             );
         }
 
-          // **Obtener la empresa usando FeignClient**
+          // Obtener la empresa usando FeignClient
         List<EmpresaDTO> empresas = empresaClient.listarEmpresas(empresaId);
         EmpresaDTO empresa = null;
         if (!empresas.isEmpty()) {
