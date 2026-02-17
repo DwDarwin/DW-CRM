@@ -26,13 +26,13 @@ public class ContactoController {
         return service.listarPorEmpresa(empresaId);
     }
 
-    @PutMapping("/contactos{id}")
+    @PutMapping("/{id}")
     public Contacto actualizar(@PathVariable Long id,
                               @RequestBody Contacto contacto){
         return service.actualizar(id, contacto );
     }
 
-    @DeleteMapping("/contactos{id}")
+    @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id){
         service.eliminar(id);
     }
