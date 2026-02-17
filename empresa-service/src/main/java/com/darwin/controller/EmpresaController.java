@@ -28,12 +28,12 @@ public class EmpresaController {
 
     }
 
-    @PutMapping("/empresas/{id}")
+    @PutMapping("/{id}")
     public Empresa actualizar(@PathVariable Long id, @RequestBody Empresa empresa){
         return service.actualizar(id, empresa);
     }
 
-    @DeleteMapping("/empresas/{id}")
+    @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id){
         service.eliminar(id);
     }
