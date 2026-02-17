@@ -83,7 +83,7 @@ public class DashboardController {
         model.addAttribute("empresaSeleccionada", empresaId);
         model.addAttribute("dashboard", dashboard);
 
-        model.addAttribute("dashboard", dashboard);
+
 
         // Formularios vacíos
         model.addAttribute("empresaForm", new EmpresaDTO());

@@ -21,7 +21,6 @@ public class Empresa {
     private String nombre;
     private String nit;
     private String direccion;
-
     private String telefono;
     private String correoGeneral;
 }
