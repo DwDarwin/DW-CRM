@@ -10,4 +10,5 @@ public class DashboardContactoDTO {
     private ContactoDTO contacto;
     private List<InteraccionDTO> interacciones;
 
+
 }

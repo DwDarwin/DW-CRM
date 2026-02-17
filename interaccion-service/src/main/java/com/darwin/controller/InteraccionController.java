@@ -21,6 +21,7 @@ public class InteraccionController {
 
     @GetMapping
     public List<Interaccion> listar(@RequestParam Long contactoId){
+
         return service.listarPorContacto(contactoId);
     }
 

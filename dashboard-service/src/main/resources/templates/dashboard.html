@@ -242,8 +242,8 @@
                           th:object="${interaccionForm}">
 
                         <input type="hidden"
-                               th:field="*{contactoId}"
-                               th:value="${contactoDash.contacto.id}"/>
+                               name="contactoId"
+                               th:value="${contactoDash.contacto.id}" />
 
                         <div class="row">
                             <div class="col-md-3">

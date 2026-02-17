@@ -91,6 +91,7 @@ public class DashboardController {
         model.addAttribute("interaccionForm", new InteraccionDTO());
 
         return "dashboard";
+
     }
 
     @PostMapping("/dashboard/empresa")
@@ -112,12 +113,22 @@ public class DashboardController {
 
     @PostMapping("/dashboard/interaccion")
     public String crearInteraccion(@ModelAttribute InteraccionDTO interaccionDTO) {
+
+        System.out.println("===== DEBUG =====");
+        System.out.println("contactoId: " + interaccionDTO.getContactoId());
+        System.out.println("fecha: " + interaccionDTO.getFecha());
+        System.out.println("tipo: " + interaccionDTO.getTipo());
+        System.out.println("resultado: " + interaccionDTO.getResultado());
+        System.out.println("=================");
+
         interaccionClient.crearInteraccion(interaccionDTO);
+
         return "redirect:/dashboard";
     }
-    @PostMapping("/dashboard/interaccion/eliminar/{id}")
-    public String eliminarInteraccion(@PathVariable Long id) {
-        interaccionClient.eliminarInteracciones(id);
+
+      @PostMapping("/dashboard/interaccion/eliminar/{id}")
+      public String eliminarInteraccion(@PathVariable Long id) {
+         interaccionClient.eliminarInteracciones(id);
         return "redirect:/dashboard";
     }
 

@@ -17,10 +17,12 @@ public class InteraccionService {
     private final InteraccionRepository repository;
 
     public Interaccion guardar(Interaccion interaccion){
+
         return repository.save(interaccion);
     }
 
     public List<Interaccion> listarPorContacto(Long contactoId){
+
         return repository.findByContactoId(contactoId);
     }
 
