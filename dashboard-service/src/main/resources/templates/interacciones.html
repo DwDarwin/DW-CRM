@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Interacciones</title></head>
+<head>
+    <title>Interacciones</title>
+</head>
 <body>
-<h1>Interacciones</h1>
+<h1>Interacciones de la Empresa: <span th:text="${empresa.nombre}"></span></h1>
 
+//nueva interaccion
 <form th:action="@{/contactos/{contactoId}/interacciones(contactoId=${contactoId})}"
       th:object="${interaccionForm}" method="post">
     <label>Descripción: <input type="text" th:field="*{descripcion}" /></label><br/>
@@ -12,12 +15,17 @@
     <button type="submit">Agregar Interacción</button>
 </form>
 
-<h2>Lista de Interacciones</h2>
-<ul>
-    <li th:each="i : ${interacciones}">
-        <span th:text="${i.descripcion}"></span> -
-        <span th:text="${#dates.format(i.fecha, 'dd/MM/yyyy')}"></span> -
-        <span th:text="${i.completada ? 'Sí' : 'No'}"></span>
+<h2>Lista de Contactos e Interacciones</h2>
+<ul th:each="entry : ${interaccionesPorContacto}">
+    <li>
+        <strong th:text="${entry.key.nombre}">Nombre Contacto</strong>
+        <ul>
+            <li th:each="i : ${entry.value}">
+                <span th:text="${i.descripcion}"></span> -
+                <span th:text="${#dates.format(i.fecha, 'dd/MM/yyyy')}"></span> -
+                <span th:text="${i.completada ? 'Sí' : 'No'}"></span>
+            </li>
+        </ul>
     </li>
 </ul>
 
