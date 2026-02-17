@@ -18,6 +18,10 @@ public class ContactoService {
         return repository.save(contacto);
     }
 
+    public List<Contacto> listar(){
+        return repository.findAll();
+    }
+
     public List<Contacto> listarPorEmpresa(Long empresaId){
 
         return repository.findByEmpresaId(empresaId);

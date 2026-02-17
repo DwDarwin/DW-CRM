@@ -14,6 +14,12 @@ public class ContactoController {
 
     private final ContactoService service;
 
+    @GetMapping("/lista")
+    public List<Contacto> listar(){
+
+        return service.listar();
+    }
+
     @PostMapping
     public Contacto crear(@RequestBody Contacto contacto){
 
