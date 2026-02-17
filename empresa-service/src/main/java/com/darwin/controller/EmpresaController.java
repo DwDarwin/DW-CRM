@@ -23,6 +23,19 @@ public class EmpresaController {
 
     @GetMapping
     public List<Empresa> listar(){
+
         return service.listar();
+
     }
+
+    @PutMapping("/empresas/{id}")
+    public Empresa actualizar(@PathVariable Long id, @RequestBody Empresa empresa){
+        return service.actualizar(id, empresa);
+    }
+
+    @DeleteMapping("/empresas/{id}")
+    public void eliminar(@PathVariable Long id){
+        service.eliminar(id);
+    }
+
 }
