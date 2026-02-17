@@ -26,6 +26,18 @@ public class InteraccionController {
 
     @GetMapping("/pendientes")
     public List<Interaccion> pendientes(){
+
         return service.pendientes();
+    }
+
+    @PutMapping("/interacciones{id}")
+    public Interaccion actualizar(@PathVariable Long id,
+                               @RequestBody Interaccion interaccion){
+        return service.actualizar(id, interaccion );
+    }
+
+    @DeleteMapping("/interacciones{id}")
+    public void eliminar(@PathVariable Long id){
+        service.eliminar(id);
     }
 }

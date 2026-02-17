@@ -25,6 +25,27 @@ public class InteraccionService {
     }
 
     public List<Interaccion> pendientes(){
+
         return repository.findByFechaSeguimientoBefore(LocalDateTime.now());
+    }
+
+    public Interaccion actualizar(Long id, Interaccion datos){
+        Interaccion interaccion = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Interacción no encontrada con id: " + id));
+
+        interaccion.setFecha(datos.getFecha());
+        interaccion.setTipo(datos.getTipo());
+        interaccion.setDescripcion(datos.getDescripcion());
+        interaccion.setResultado(datos.getResultado());
+        interaccion.setFechaSeguimiento(datos.getFechaSeguimiento());
+
+        return repository.save(interaccion);
+    }
+
+    public void eliminar(Long id){
+        if(!repository.existsById(id)){
+            throw new RuntimeException("Interacción no encontrada con id: " + id);
+        }
+        repository.deleteById(id);
     }
 }
