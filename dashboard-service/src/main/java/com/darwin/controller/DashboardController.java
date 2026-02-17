@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,18 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String verDashboard(Model model) {
+    public String verDashboard(@RequestParam(required = false) Long empresaId,
+                                Model model)  {
 
         List<EmpresaDTO> empresas = empresaClient.listarEmpresas(0L);
         List<DashboardEmpresaDTO> dashboard = new ArrayList<>();
 
         for (EmpresaDTO empresa : empresas) {
+
+            // filtro empresa
+            if (empresaId != null && !empresa.getId().equals(empresaId)) {
+                continue;
+            }
 
             DashboardEmpresaDTO dashEmpresa = new DashboardEmpresaDTO();
             dashEmpresa.setEmpresa(empresa);
@@ -58,6 +65,10 @@ public class DashboardController {
             dashEmpresa.setContactos(dashContactos);
             dashboard.add(dashEmpresa);
         }
+
+        model.addAttribute("empresas", empresas);
+        model.addAttribute("empresaSeleccionada", empresaId);
+        model.addAttribute("dashboard", dashboard);
 
         model.addAttribute("dashboard", dashboard);
 

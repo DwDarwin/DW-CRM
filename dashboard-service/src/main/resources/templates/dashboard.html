@@ -10,6 +10,43 @@
 <div class="container mt-4">
     <h1 class="mb-4 text-center">📊 Dashboard General</h1>
 
+    <!-- ============================= -->
+    <!-- FORMULARIO CREAR EMPRESA -->
+    <!-- ============================= -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-success text-white">
+            ➕ Nueva Empresa
+        </div>
+        <div class="card-body">
+            <form th:action="@{/dashboard/empresa}" method="post" th:object="${empresaForm}">
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        <input type="text" th:field="*{nombre}" class="form-control"
+                               placeholder="Nombre" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" th:field="*{nit}" class="form-control"
+                               placeholder="NIT">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" th:field="*{telefono}" class="form-control"
+                               placeholder="Teléfono">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="email" th:field="*{correoGeneral}" class="form-control"
+                               placeholder="Correo">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success w-100">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================= -->
+    <!-- LISTADO EMPRESAS -->
+    <!-- ============================= -->
     <div th:each="empresaDash : ${dashboard}" class="card mb-4 shadow-sm">
 
         <!-- Empresa -->
@@ -24,14 +61,59 @@
 
         <div class="card-body">
 
-            Contactos
+            <!-- ============================= -->
+            <!-- FORMULARIO CREAR CONTACTO -->
+            <!-- ============================= -->
+            <div class="mb-4">
+                <h6>➕ Nuevo Contacto</h6>
+                <form th:action="@{/dashboard/contacto}" method="post"
+                      th:object="${contactoForm}">
+                    <input type="hidden" name="empresaId"
+                           th:value="${empresaDash.empresa.id}" />
+
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <input type="text" th:field="*{nombre}"
+                                   class="form-control"
+                                   placeholder="Nombre" required>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" th:field="*{cargo}"
+                                   class="form-control"
+                                   placeholder="Cargo">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" th:field="*{telefono}"
+                                   class="form-control"
+                                   placeholder="Teléfono">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" th:field="*{celular}"
+                                   class="form-control"
+                                   placeholder="Celular">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="email" th:field="*{correo}"
+                                   class="form-control"
+                                   placeholder="Correo">
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary w-100">+</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ============================= -->
+            <!-- CONTACTOS -->
+            <!-- ============================= -->
             <div th:each="contactoDash : ${empresaDash.contactos}" class="mb-4">
 
                 <div class="border rounded p-3 bg-white">
                     <h5>
                         👤 <span th:text="${contactoDash.contacto.nombre}"></span> |
                         <small class="text-muted"
-                           th:text="${contactoDash.contacto.cargo}"></small>
+                               th:text="${contactoDash.contacto.cargo}"></small>
                     </h5>
 
                     <p class="mb-1">
@@ -40,7 +122,9 @@
                         | ✉ <span th:text="${contactoDash.contacto.correo}"></span>
                     </p>
 
-                    Seguimiento a clientes
+                    <!-- ============================= -->
+                    <!-- TABLA INTERACCIONES -->
+                    <!-- ============================= -->
                     <table class="table table-sm table-striped mt-2">
                         <thead class="table-dark">
                         <tr>
@@ -61,6 +145,49 @@
                         </tr>
                         </tbody>
                     </table>
+
+                    <!-- ============================= -->
+                    <!-- FORMULARIO CREAR INTERACCIÓN -->
+                    <!-- ============================= -->
+                    <div class="mt-3">
+                        <h6>➕ Nueva Interacción</h6>
+                        <form th:action="@{/dashboard/interaccion}"
+                              method="post"
+                              th:object="${interaccionForm}">
+
+                            <input type="hidden" name="contactoId"
+                                   th:value="${contactoDash.contacto.id}" />
+
+                            <div class="row g-2">
+                                <div class="col-md-2">
+                                    <input type="text" th:field="*{tipo}"
+                                           class="form-control form-control-sm"
+                                           placeholder="Tipo">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" th:field="*{descripcion}"
+                                           class="form-control form-control-sm"
+                                           placeholder="Descripción">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" th:field="*{resultado}"
+                                           class="form-control form-control-sm"
+                                           placeholder="Resultado">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="datetime-local"
+                                           th:field="*{fechaSeguimiento}"
+                                           class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-danger btn-sm w-100">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
 
                 </div>
             </div>
