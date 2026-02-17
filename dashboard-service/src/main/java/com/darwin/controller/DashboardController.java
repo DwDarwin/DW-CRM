@@ -7,10 +7,7 @@ import com.darwin.dto.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +62,22 @@ public class DashboardController {
             dashEmpresa.setContactos(dashContactos);
             dashboard.add(dashEmpresa);
         }
+        int totalEmpresas = dashboard.size();
+        int totalContactos = 0;
+        int totalInteracciones = 0;
+
+        for (DashboardEmpresaDTO emp : dashboard) {
+            totalContactos += emp.getContactos().size();
+
+            for (DashboardContactoDTO con : emp.getContactos()) {
+                totalInteracciones += con.getInteracciones().size();
+            }
+        }
+
+        model.addAttribute("totalEmpresas", totalEmpresas);
+        model.addAttribute("totalContactos", totalContactos);
+        model.addAttribute("totalInteracciones", totalInteracciones);
+
 
         model.addAttribute("empresas", empresas);
         model.addAttribute("empresaSeleccionada", empresaId);
@@ -91,11 +104,30 @@ public class DashboardController {
         contactoClient.crearContacto(contactoDTO);
         return "redirect:/dashboard";
     }
+    @PostMapping("/dashboard/contacto/eliminar/{id}")
+    public String eliminarContacto(@PathVariable Long id) {
+        contactoClient.eliminarContacto(id);
+        return "redirect:/dashboard";
+    }
 
     @PostMapping("/dashboard/interaccion")
     public String crearInteraccion(@ModelAttribute InteraccionDTO interaccionDTO) {
         interaccionClient.crearInteraccion(interaccionDTO);
         return "redirect:/dashboard";
     }
+    @PostMapping("/dashboard/interaccion/eliminar/{id}")
+    public String eliminarInteraccion(@PathVariable Long id) {
+        interaccionClient.eliminarInteracciones(id);
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/dashboard/empresa/eliminar/{id}")
+    public String eliminarEmpresa(@PathVariable Long id) {
+        empresaClient.eliminarEmpresa(id);
+        return "redirect:/dashboard";
+    }
+
+
+
 
 }

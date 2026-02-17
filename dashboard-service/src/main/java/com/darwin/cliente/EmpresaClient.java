@@ -3,10 +3,7 @@ package com.darwin.cliente;
 import com.darwin.dto.ContactoDTO;
 import com.darwin.dto.EmpresaDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,4 +15,8 @@ public interface EmpresaClient {
 
     @PostMapping("/empresas")
     EmpresaDTO crearEmpresa(@RequestBody EmpresaDTO empresa);
+
+    @DeleteMapping("/empresas/{id}")
+    void eliminarEmpresa(@PathVariable Long id);
+
 }

@@ -3,10 +3,7 @@ package com.darwin.cliente;
 import com.darwin.dto.EmpresaDTO;
 import com.darwin.dto.InteraccionDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +16,10 @@ public interface InteraccionClient {
 
     @PostMapping("/interacciones")
     InteraccionDTO crearInteraccion(@RequestBody InteraccionDTO interaccion);
+
+    @DeleteMapping("/interacciones/{id}")
+    void eliminarInteracciones(@PathVariable Long id);
+
+
+
 }
