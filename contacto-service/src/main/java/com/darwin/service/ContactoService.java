@@ -22,4 +22,24 @@ public class ContactoService {
 
         return repository.findByEmpresaId(empresaId);
     }
+
+    public Contacto actualizar(Long id, Contacto datos){
+        Contacto contacto = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("\"Contacto no encontrado con id: \" + id"));
+
+        contacto.setNombre(datos.getNombre());
+        contacto.setCargo(datos.getCargo());
+        contacto.setTelefono(datos.getTelefono());
+        contacto.setCelular(datos.getCelular());
+        contacto.setCorreo(datos.getCorreo());
+
+        return repository.save(contacto);
+    }
+
+    public void eliminar(Long id){
+        if(!repository.existsById(id)){
+            throw new RuntimeException("Contacto no encontrado con id: " + id);
+        }
+        repository.deleteById(id);
+    }
 }
