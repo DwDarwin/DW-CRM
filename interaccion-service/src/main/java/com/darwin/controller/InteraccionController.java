@@ -30,13 +30,13 @@ public class InteraccionController {
         return service.pendientes();
     }
 
-    @PutMapping("/interacciones{id}")
+    @PutMapping("/{id}")
     public Interaccion actualizar(@PathVariable Long id,
                                @RequestBody Interaccion interaccion){
         return service.actualizar(id, interaccion );
     }
 
-    @DeleteMapping("/interacciones{id}")
+    @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id){
         service.eliminar(id);
     }
