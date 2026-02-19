@@ -114,12 +114,12 @@ public class DashboardController {
     @PostMapping("/dashboard/interaccion")
     public String crearInteraccion(@ModelAttribute InteraccionDTO interaccionDTO) {
 
-        System.out.println("===== DEBUG =====");
-        System.out.println("contactoId: " + interaccionDTO.getContactoId());
-        System.out.println("fecha: " + interaccionDTO.getFecha());
-        System.out.println("tipo: " + interaccionDTO.getTipo());
-        System.out.println("resultado: " + interaccionDTO.getResultado());
-        System.out.println("=================");
+//        System.out.println("===== DEBUG =====");
+//        System.out.println("contactoId: " + interaccionDTO.getContactoId());
+//        System.out.println("fecha: " + interaccionDTO.getFecha());
+//        System.out.println("tipo: " + interaccionDTO.getTipo());
+//        System.out.println("resultado: " + interaccionDTO.getResultado());
+//        System.out.println("=================");
 
         interaccionClient.crearInteraccion(interaccionDTO);
 
