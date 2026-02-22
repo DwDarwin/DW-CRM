@@ -27,7 +27,7 @@ public class DashboardRestController {
         this.interaccionClient = interaccionClient;
     }
 
-    // Obtener todo el dashboard
+    //dashboard
     @GetMapping
     public ResponseEntity<?> obtenerDashboard(@RequestParam(required = false) Long empresaId) {
         try {
@@ -59,31 +59,15 @@ public class DashboardRestController {
                 dashEmpresa.setContactos(dashContactos);
                 dashboard.add(dashEmpresa);
             }
+            return ResponseEntity.ok(dashboard);
 
-            // Calcular totales
-            int totalEmpresas = dashboard.size();
-            int totalContactos = 0;
-            int totalInteracciones = 0;
-
-            for (DashboardEmpresaDTO emp : dashboard) {
-                totalContactos += emp.getContactos().size();
-                for (DashboardContactoDTO con : emp.getContactos()) {
-                    totalInteracciones += con.getInteracciones().size();
-                }
-            }
-
-            return ResponseEntity.ok(new DashboardResponse(
-                    totalEmpresas,
-                    totalContactos,
-                    totalInteracciones,
-                    dashboard
-            ));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al obtener dashboard: " + e.getMessage());
         }
+
     }
 
-    // Obtener solo empresas
+
     @GetMapping("/empresas")
     public ResponseEntity<List<EmpresaDTO>> obtenerEmpresas() {
         try {
@@ -93,7 +77,7 @@ public class DashboardRestController {
         }
     }
 
-    // Crear empresa
+
     @PostMapping("/empresas")
     public ResponseEntity<?> crearEmpresa(@RequestBody EmpresaDTO empresaDTO) {
         try {
@@ -104,7 +88,7 @@ public class DashboardRestController {
         }
     }
 
-    // Crear contacto
+
     @PostMapping("/contactos")
     public ResponseEntity<?> crearContacto(@RequestBody ContactoDTO contactoDTO) {
         try {
@@ -115,7 +99,26 @@ public class DashboardRestController {
         }
     }
 
-    // Crear interacción
+    @PutMapping("/empresas/{id}")
+    public EmpresaDTO actualizarEmpresa(@PathVariable Long id,
+                                          @RequestBody EmpresaDTO empresa) {
+        return empresaClient.editarEmpresa(id, empresa);
+    }
+
+
+    @PutMapping("/contactos/{id}")
+    public ContactoDTO actualizarContacto(@PathVariable Long id,
+                                          @RequestBody ContactoDTO contacto) {
+        return contactoClient.editarContacto(id, contacto);
+    }
+
+    @PutMapping("/interacciones/{id}")
+    public InteraccionDTO actualizarInteraccion(@PathVariable Long id,
+                                          @RequestBody InteraccionDTO interaccion) {
+        return interaccionClient.editarInteraccion(id, interaccion);
+    }
+
+
     @PostMapping("/interacciones")
     public ResponseEntity<?> crearInteraccion(@RequestBody InteraccionDTO interaccionDTO) {
         try {
@@ -126,7 +129,6 @@ public class DashboardRestController {
         }
     }
 
-    // Eliminar empresa
     @DeleteMapping("/empresas/{id}")
     public ResponseEntity<?> eliminarEmpresa(@PathVariable Long id) {
         try {
@@ -137,7 +139,7 @@ public class DashboardRestController {
         }
     }
 
-    // Eliminar contacto
+
     @DeleteMapping("/contactos/{id}")
     public ResponseEntity<?> eliminarContacto(@PathVariable Long id) {
         try {
@@ -148,7 +150,7 @@ public class DashboardRestController {
         }
     }
 
-    // Eliminar interacción
+
     @DeleteMapping("/interacciones/{id}")
     public ResponseEntity<?> eliminarInteraccion(@PathVariable Long id) {
         try {
@@ -157,27 +159,11 @@ public class DashboardRestController {
         } catch (Exception e) {
             return ResponseEntity.status(400).body("Error: " + e.getMessage());
         }
+
+
     }
 
-    // Clase interna para la respuesta del dashboard
-    public static class DashboardResponse {
-        private int totalEmpresas;
-        private int totalContactos;
-        private int totalInteracciones;
-        private List<DashboardEmpresaDTO> dashboard;
-
-        public DashboardResponse(int totalEmpresas, int totalContactos,
-                                 int totalInteracciones, List<DashboardEmpresaDTO> dashboard) {
-            this.totalEmpresas = totalEmpresas;
-            this.totalContactos = totalContactos;
-            this.totalInteracciones = totalInteracciones;
-            this.dashboard = dashboard;
-        }
-
-        // Getters
-        public int getTotalEmpresas() { return totalEmpresas; }
-        public int getTotalContactos() { return totalContactos; }
-        public int getTotalInteracciones() { return totalInteracciones; }
-        public List<DashboardEmpresaDTO> getDashboard() { return dashboard; }
-    }
 }
+
+
+

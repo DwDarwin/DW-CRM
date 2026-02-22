@@ -16,6 +16,10 @@ public interface ContactoClient {
     ContactoDTO crearContacto(@RequestBody ContactoDTO contacto);
 
     @DeleteMapping("/contactos/{id}")
-        void eliminarContacto(@PathVariable Long id);
+     void eliminarContacto(@PathVariable Long id);
+
+    @PutMapping("/contactos/{id}")
+    ContactoDTO editarContacto(@PathVariable Long id,@RequestBody ContactoDTO contacto);
+
 
 }

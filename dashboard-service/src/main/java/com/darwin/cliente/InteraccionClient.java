@@ -20,6 +20,9 @@ public interface InteraccionClient {
     @DeleteMapping("/interacciones/{id}")
     void eliminarInteracciones(@PathVariable Long id);
 
+    @PutMapping("/interacciones/{id}")
+    InteraccionDTO editarInteraccion(@PathVariable Long id,@RequestBody InteraccionDTO interaccion);
+
 
 
 }

@@ -19,4 +19,7 @@ public interface EmpresaClient {
     @DeleteMapping("/empresas/{id}")
     void eliminarEmpresa(@PathVariable Long id);
 
+    @PutMapping("/empresas/{id}")
+    EmpresaDTO editarEmpresa(@PathVariable Long id,@RequestBody EmpresaDTO empresa);
+
 }
