@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/dashboard")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // no se está usando solo es para consumo de endpoind desde el front
 public class DashboardRestController {
 
     private final EmpresaClient empresaClient;

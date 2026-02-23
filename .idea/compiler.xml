@@ -7,26 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dashboard-service" />
-      </profile>
-      <profile name="Annotation profile for interaccion-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
-        <module name="empresa-service" />
+        <module name="api-gateway" />
         <module name="interaccion-service" />
         <module name="contacto-service" />
+        <module name="empresa-service" />
+        <module name="dashboard-service" />
+        <module name="eureka-server" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="contacto-service" options="-parameters" />
       <module name="dashboard-service" options="-parameters" />
       <module name="empresa-service" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
       <module name="interaccion-service" options="-parameters" />
     </option>
   </component>
