@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "interaccion-service", url = "http://localhost:8083")
+@FeignClient(name = "interaccion-service")
 public interface InteraccionClient {
 
 
